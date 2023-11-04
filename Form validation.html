@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin: 50px auto;
+            max-width: 300px;
+        }
+        input[type="text"] {
+            display: block;
+            margin: 10px auto;
+        }
+        #error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Form Validation</h1>
+        <form onsubmit="return validateForm()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <label for="email">Email:</label>
+            <input type="text" id="email" required>
+            <p id="error-message"></p>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const errorMessage = document.getElementById("error-message");
+
+            // Simple validation checks
+            if (name === "" || email === "") {
+                errorMessage.textContent = "Name and email are required.";
+                return false; // Prevent form submission
+            }
+
+            // Email validation using a regular expression
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!email.match(emailPattern)) {
+                errorMessage.textContent = "Please enter a valid email address.";
+                return false; // Prevent form submission
+            }
+
+            // If all validation checks pass, the form is submitted
+            errorMessage.textContent = "";
+            return true;
+        }
+    </script>
+</body>
+</html
